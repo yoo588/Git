@@ -12,38 +12,12 @@ public:
 	void handleEvents();
 	void clean();
 	bool running() { return m_bRunning; }
+	SDL_Texture* m_pTexture;
+	SDL_Rect m_sourceRectangle;
+	SDL_Rect m_destinatioRectangle;
 private:
 	SDL_Window * m_pWindow;
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 };
 
-void Game::render()
-{
-	SDL_RenderClear(m_pRenderer);
-	SDL_RenderPresent(m_pRenderer);
-}
-
-void Game::clean()
-{
-	std::cout << "cleanning game\n";
-	SDL_DestroyWindow(m_pWindow);
-	SDL_DestroyRenderer(m_pRenderer);
-	SDL_Quit();
-}
-
-void Game::handleEvents()
-{
-	SDL_Event event;
-	if (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			m_bRunning = false;
-			break;
-		default:
-			break;
-		}
-	}
-}
